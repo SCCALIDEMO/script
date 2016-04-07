@@ -1,5 +1,4 @@
 if (currentUserID == "ADMIN") {
-	showDebug = 3
-	comment("Parent Test:" + isParent(capId))
-	
+	showMessage = true
+	comment("This is a message test.")
 }

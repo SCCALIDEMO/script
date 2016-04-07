@@ -1,2 +1,5 @@
-if(currentUserID =="ADMIN")
-{showDebug=3}
+if (appMatch("Building/*/*/*") && wfTask == "Application Intake" && wfStatus == "Denied") {
+	showDebug = 3
+	comment("CLOSE WORKFLOW")
+}
+

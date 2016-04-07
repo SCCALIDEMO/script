@@ -1,5 +1,5 @@
 if (currentUserID == "ADMIN") {
 	showDebug = 3
-	comment("TEST")
+	comment("Parent Test:" + isParent(capId))
 	
 }

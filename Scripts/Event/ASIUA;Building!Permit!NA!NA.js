@@ -1,2 +1,2 @@
-if(currentUserID =="admin")
+if(currentUserID =="ADMIN")
 {showDebug=3}

@@ -1,2 +1,1 @@
-if(currentUserID =="ADMIN")
-{showDebug=3}
+if(matches(currentUserID, "ADMIN")) showDebug=3;

@@ -1,3 +1,6 @@
+/*--------------------------------------------------------------------------------------------------------------------/
+| Start BD 09/07/16 Added createAgencyClearanceChildRecord Function
+/--------------------------------------------------------------------------------------------------------------------*/
 /*===================================================================
 // Script Number: 5
 // Script Name: createAgencyClearanceChildRecord.js
@@ -9,9 +12,9 @@
 //            WTUA;Building!Permit!NA!NA
 //            WTUA;Building!Permit!Plan Revision!NA
 ===================================================================*/
-logDebug("running script: createAgencyClearanceChildRecord");
-try {
-	if (wfTask == "Building and Safety Clearance for Plan Check" && wfStatus == "Initiate Agency Clearance"){
+function createAgencyClearanceChildRecord(){
+	logDebug("running script: createAgencyClearanceChildRecord");
+	try {
 		var childId = null;
 		var structType = AInfo["Building/Structure Type"];
 		if (structType == "Commercial" || structType == "Mixed Use (residential and commercial)"){
@@ -28,7 +31,10 @@ try {
 			copyOwner(capId, childId);
 			aa.cap.copyCapWorkDesInfo(capId, childId);
 		}
+	} catch (error){
+		logDebug("Javascript error: " + error.message);
 	}
-} catch (error){
-	logDebug("Javascript error: " + error.message);
 }
+/*--------------------------------------------------------------------------------------------------------------------/
+| End BD 09/07/16 Added createAgencyClearanceChildRecord Function
+/--------------------------------------------------------------------------------------------------------------------*/

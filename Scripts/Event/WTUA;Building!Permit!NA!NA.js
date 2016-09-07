@@ -1,3 +1,4 @@
-if(currentUserID =="ADMIN")
-{showDebug=3}
+//if(currentUserID =="ADMIN")
+//{showDebug=3}
+showDebug = true;
 include("createAgencyClearanceChildRecord");

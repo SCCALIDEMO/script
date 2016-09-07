@@ -9,6 +9,7 @@
 //            WTUA;Building!Permit!NA!NA
 //            WTUA;Building!Permit!Plan Revision!NA
 ===================================================================*/
+logDebug("running script: createAgencyClearanceChildRecord");
 try {
 	if (wfTask == "Building and Safety Clearance for Plan Check" && wfStatus == "Initiate Agency Clearance"){
 		var childId = null;

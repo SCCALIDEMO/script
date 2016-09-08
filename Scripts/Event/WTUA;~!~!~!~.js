@@ -4,3 +4,4 @@ if (appMatch("Building/*/*/*") && wfTask == "Application Intake" && wfStatus == 
 	deactivateTask("Application Intake")
 }
 
+include("WTUA;Building!Permit!Agency Clearance!Commercial");

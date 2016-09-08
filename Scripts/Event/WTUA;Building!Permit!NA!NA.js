@@ -1,3 +1,3 @@
 if(currentUserID =="ADMIN")
 {showDebug=3}
-//include("createAgencyClearanceChildRecord");
+include("createAgencyClearanceChildRecord");

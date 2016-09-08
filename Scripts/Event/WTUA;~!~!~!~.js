@@ -5,4 +5,4 @@ if (appMatch("Building/*/*/*") && wfTask == "Application Intake" && wfStatus == 
 }
 
 showDebug = 3;
-include("WTUA;Building!Permit!Agency Clearance!Commercial");
+include("WTUA:Building/Permit/Agency Clearance/Commercial");

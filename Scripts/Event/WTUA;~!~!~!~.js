@@ -5,4 +5,12 @@ if (appMatch("Building/*/*/*") && wfTask == "Application Intake" && wfStatus == 
 }
 
 showDebug = 3;
-include("WTUA:Building/Permit/Agency Clearance/Commercial");
+if (wfTask == "Close" && wfStatus == "Close"){
+	parentId = getParent();
+	if (!parentId){
+		logDebug("Parent record for " + capId.getCustomID() + " not found");
+	} else {
+		editAppSpecific("Agency Clearance", "Yes", parentId);
+		logDebug("Agency Clearance for " + parentId.getCustomID() + " set to " + getAppSpecific("Agency Clearance", parentId));
+	}
+}

@@ -2,6 +2,7 @@ if (appMatch("Building/*/*/*") && wfTask == "Application Intake" && wfStatus == 
 	showDebug = 3
 	comment("CLOSE WORKFLOW")
 	deactivateTask("Application Intake");
-	include("WTUA;Building!Permit!Agency Clearance!Commercial");
 }
 
+showDebug = 3;
+include("WTUA;Building!Permit!Agency Clearance!Commercial");

@@ -15,7 +15,8 @@ try {
 		if (!parentId){
 			logDebug("Parent record for " + capId.getCustomID() + " not found");
 		} else {
-			editAppSpecific("Agency Clearance", "Y", parentId);
+			editAppSpecific("Agency Clearance", "Yes", parentId);
+			logDebug("Agency Clearance for " + parentId.getCustomID() + " set to " + getAppSpecific("Agency Clearance", parentId));
 		}
 	}
 } catch (error){

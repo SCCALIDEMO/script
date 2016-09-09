@@ -12,14 +12,14 @@ logDebug("running script: ExtendPermitExpirationDate)");
 logDebug("Inspection Result: " + inspResult);
 try {
 	if (!matches(inspResult, "Not Inspected", "Not Ready") && !matches(AInfo["Supervisor Over Ride"], "Yes")){
-		var appExpirationDateString = null;
-		var appExpiration = AInfo["Application Expiration"];
-		if (!!appExpiration){
-			appExpirationDateString = appExpiration.toString();
+		var permitExpirationDateString = null;
+		var permitExpiration = AInfo["Permit Expiration"];
+		if (!!permitExpiration){
+			permitExpirationDateString = permitExpiration.toString();
 		}
-		var newAppExpirationDateString = dateAdd(appExpirationDateString, 181);
-		editAppSpecific("Application Expiration", newAppExpirationDateString);
-		logDebug("Set new Application Expiration date to " + getAppSpecific("Application Expiration"));
+		var newPermitExpirationDateString = dateAdd(permitExpirationDateString, 181);
+		editAppSpecific("Permit Expiration", newPermitExpirationDateString);
+		logDebug("Set new Permit Expiration date to " + getAppSpecific("Permit Expiration"));
 	}
 } catch (error){
 	logDebug("Javascript error: " + error.message);

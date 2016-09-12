@@ -167,7 +167,7 @@ function mainProcess() {
 		return false;
 	}
 
-	for (cap in myCaps) // for each b1expiration (effectively, each license app)
+	for (index in myCaps) // for each b1expiration (effectively, each license app)
 	{
 //		b1Exp = myExp[thisExp];
 //		var expDate = b1Exp.getExpDate();
@@ -183,6 +183,7 @@ function mainProcess() {
 //			logDebug("Could not get a Cap ID for " + b1Exp.getCapID().getID1() + "-" + b1Exp.getCapID().getID2() + "-" + b1Exp.getCapID().getID3());
 //			continue;
 //		}
+		cap = myCaps[index];
 		capId = cap.getCapID();
 		altId = capId.getCustomID();
 //

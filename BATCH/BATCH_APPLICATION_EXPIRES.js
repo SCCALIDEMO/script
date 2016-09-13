@@ -223,19 +223,24 @@ function mainProcess() {
 		var appExpiration = getAppSpecific("Application Expiration", capId);
 		if (appExpiration == null) {
 			capFilterExpirationDate++;
-			logDebug(altId + ": unable to get ASI 'Application Expiration'");
+//			logDebug(altId + ": unable to get ASI 'Application Expiration'");
 			continue;
 		}
 		var dAppExpiration = new Date(appExpiration);
-		if (dAppExpiration == null){
+		if (!dAppExpiration){
 			capFilterExpirationDate++;
 			logDebug(altId + ": unable to create Date object from ASI 'Application Expiration'");
+			continue;			
+		}
+		if (isNaN(dAppExpiration.getTime())){
+			capFilterExpirationDate++;
+			logDebug(altId + ": unable to create valid Date object from ASI 'Application Expiration'");
 			continue;			
 		}
 		var today = new Date();
 		if (today.getTime() < dAppExpiration.getTime()){
 			capFilterExpirationDate++;
-			logDebug(altId + ": skipping, app has not expired");
+//			logDebug(altId + ": skipping, app has not expired");
 			continue;			
 		}
 

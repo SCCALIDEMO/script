@@ -209,14 +209,14 @@ function mainProcess() {
 		// Filter by CAP Type
 		if (appType.length && !appMatch(appType)) {
 			capFilterType++;
-			logDebug(altId + ": Application Type does not match")
+//			logDebug(altId + ": Application Type does not match")
 			continue;
 		}
 
 		// Filter by CAP Status
 		if (!matches(capStatus, appStatus)) {
 			capFilterStatus++;
-			logDebug(altId + ": skipping due to application status of " + capStatus)
+//			logDebug(altId + ": skipping due to application status of " + capStatus)
 			continue;
 		}
 		

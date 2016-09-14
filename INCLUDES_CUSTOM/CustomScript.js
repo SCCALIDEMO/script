@@ -370,7 +370,7 @@ function buildingAssessFees(){
 	}
 }
 /*--------------------------------------------------------------------------------------------------------------------/
-| End BD 09/09/16 Added buildingAssessFees Function
+| End BD 09/13/16 Added buildingAssessFees Function
 /--------------------------------------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------------------------------------/
 | Start BD 09/13/16 Added voidRemoveFee Function
@@ -421,4 +421,75 @@ function voidRemoveFee(vFeeCode){
 }
 /*--------------------------------------------------------------------------------------------------------------------/
 | End BD 09/13/16 Added voidRemoveFee Function
+/--------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------/
+| Start BD 09/14/16 Added createPlanningChildCase Function
+/--------------------------------------------------------------------------------------------------------------------*/
+/*===================================================================
+//Script Number: 27
+//Script Name: createPlanningChildCase
+//Script Developer: Bryan de Jesus
+//Script Agency: Woolpert
+//Script Description: During the creation of a master case, create child cases when corresponding ASI check boxes are selected copying Record Detail, Address, Parcel, and Owner information.
+//Script Run Event: ASA
+//Script Parents:
+//       ASA;Planning!Master Case!Master Case!NA
+===================================================================*/
+function createPlanningChildCase(){
+	logDebug("running script: createPlanningChildCase)");
+	try {
+		var asiToCaseTypeMap = {
+			// add ASI entries and case types
+			"Adjustment - Planning":"Planning/Master Case/Adjustment/NA",
+			"Administrative Permit - Planning":"Planning/Master Case/Administrative Permit/NA",
+			"Architectural Design Review - Planning":"Planning/Master Case/Architectural Design Review/NA",
+			"Corridor Plan":"Planning/Master Case/Corridor Plan/NA",
+			"Conditional Use Permit - Planning":"Planning/Master Case/Architectural Design Review/NA",
+			"Development Agreement - Planning":"Planning/Master Case/Development Agreement/NA",
+			"Development Review - Planning BTU":"Planning/Master Case/Development Review/NA",
+			"General Plan Amendment - Planning":"Planning/Master Case/General Plan Amendment/NA",
+			"Hillside Review - Planning 2":"Planning/Master Case/Hillside Review/Class 2",
+			"Hillside Review - Planning 4":"Planning/Master Case/Hillside Review/Class 4",
+			"Initial Study - Planning": "Planning/Master Case/Initial Study/NA",
+			"Landscape Plan Review - Planning":"Planning/Master Case/Landscape Plan Review/NA",
+			"Minor Use Permit - Planning":"Planning/Master Case/Minor Use Permit/NA",
+			"Oak Tree Permit - Class 2":"Planning/Master Case/Oak Tree Permit/Class 2",
+			"Oak Tree Permit - Class 4":"Planning/Master Case/Oak Tree Permit/Class 4",
+			"One Stop - Planning":"Planning/Master Case/One Stop/NA",
+			"Pre-Zone - Planning":"Planning/Master Case/Pre-Zone/NA",
+			"Pre-Annexation Agreement":"Planning/Master Case/Pre-Annexation Agreement/NA",
+			"Request for Reasonable Accommodations":"Planning/Master Case/Request for Reasonable Accommo/NA",
+			"Ridgeline Alteration Permit - Planning":"Planning/Master Case/Ridgeline Alteration Permit/NA",
+			"Sign Review - Planning":"Planning/Master Case/Sign Review/NA",
+			"Sign Variance - Planning":"Planning/Master Case/Sign Variance/NA",
+			"Specific Plan Amendment - Planning":"Planning/Master Case/Specific Plan/NA",
+			"Temporary Use Permit - Class 2":"Planning/Master Case/Temporary Use Permit/Class 2",
+			"Temporary Use Permit - Class 4":"Planning/Master Case/ Temporary Use Permit/Class 4",
+			"Tentative Parcel Map - Planning":"Planning/Master Case/Tentative Parcel Map/NA",
+			"Tentative Tract Map - Planning":"Planning/Master Case/Tentative Tract Map/NA",
+			"UDC":"Planning/Master Case/UDC Ammendment/NA",
+			"Zone Change - Planning":"Planning/Master Case/Zone Change/NA",
+			"Variance - Planning":"Planning/Master Case/Variance /NA"
+		};
+		for (asi in asiToCaseTypeMap){
+			// verify ASI is checked
+			var isChecked = getAppSpecific(asi);
+			if (!isChecked || isChecked != "CHECKED") continue;
+			// verify a case type is configured above
+			var caseTypeString = asiToFeeCodeMap[asi];
+			if (!caseTypeString) continue;
+			// create child case
+			var caseTypeArray = caseTypeString.split("/");
+			var caseName = asi + " case for " + capId.getCustomID();
+			var childId = createChild(caseTypeArray[0], caseTypeArray[1], caseTypeArray[2], caseTypeArray[3], caseName);
+			copyOwner(capId, childId);
+			updateWorkDesc(workDescGet(capId), childId);
+			logDebug("Created child case '" + caseName + "'");
+		}
+	} catch (error){
+		logDebug("Javascript error: " + error.message);
+	}
+}
+/*--------------------------------------------------------------------------------------------------------------------/
+| End BD 09/14/16 Added createPlanningChildCase Function
 /--------------------------------------------------------------------------------------------------------------------*/

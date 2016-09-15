@@ -153,7 +153,7 @@ function inspectionResultEmail() {
 	try {
 		for (var licProfObj in getLicenseProfessional()){
 			var emailAddress = licProfObj.refLicModel.getEmail();
-			var emailTemplate = "";
+			var emailTemplate = "B_INSPECTIONRESULT";
 			if (!emailAddress){
 				logDebug("Email address for LP not found");
 			} else {
@@ -492,4 +492,47 @@ function createPlanningChildCase(){
 }
 /*--------------------------------------------------------------------------------------------------------------------/
 | End BD 09/14/16 Added createPlanningChildCase Function
+/--------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------/
+| Start BD 09/15/16 Added dailyInspectionEmail Function
+/--------------------------------------------------------------------------------------------------------------------*/
+/*===================================================================
+//Script Number: 22
+//Script Name: dailyInspectionEmail
+//Script Developer: Bryan de Jesus
+//Script Agency: Woolpert
+//Script Description: Send an email to primary contact when inspection is scheduled. 
+//Script Run Event: ISA
+//Script Parents:
+//         ISA;Building!Permit!NA!NA
+//         ISA;Building!MEP!NA!NA
+//		   ISA;Building!Online!~!~
+===================================================================*/
+function dailyInspectionEmail() {
+	logDebug("running script: dailyInspectionEmail)");
+	try {
+		var primaryContactResult = aa.cap.getCapPrimaryContact(capId);
+		if (primaryContactResult.getSuccess()){
+			var primaryContact = primaryContactResult.getOutput();
+			var emailAddress = primaryContact.getEmail();
+			var emailTemplate = "B_INSPECTIONSCHED";
+			if (!emailAddress) logDebug("Unable to get email for primary contact on " + capId.getCustomID());
+			else {
+				// build hashtable
+				var vEParams = aa.util.newHashtable();
+				//addParameter(vEParams,"%%RECORD ID%%", altId);
+				
+				logDebug("Sending notification to " + emailAddress);
+		    	sendNotification("", emailAddress, "", emailTemplate, vEParams, null, capId);
+			}
+		} else {
+			logDebug("Unable to get primary contact for " + capId.getCustomID());
+			logDebug("Error: " + primaryContactResult.getErrorType() + ": " + primaryContactResult.getErrorMessage());
+		}
+	} catch (error){
+		logDebug("Javascript error: " + error.message);
+	}
+}
+/*--------------------------------------------------------------------------------------------------------------------/
+| End BD 09/15/16 Added dailyInspectionEmail Function
 /--------------------------------------------------------------------------------------------------------------------*/

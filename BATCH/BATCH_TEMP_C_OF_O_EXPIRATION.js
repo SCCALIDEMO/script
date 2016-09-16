@@ -248,7 +248,7 @@ function mainProcess() {
 		var actualTempCOExpirationDate;
 		if (!gracePeriodDays) actualTempCOExpirationDate = dateAdd(null, 0);
 		else actualTempCOExpirationDate = dateAdd(null, -gracePeriodDays);
-		var dActualTempCOExpirationDate = Date(actualTempCOExpirationDate);
+		var dActualTempCOExpirationDate = new Date(actualTempCOExpirationDate);
 		if (!dActualTempCOExpirationDate){
 			capFilterExpirationDate++;
 			logDebug(altId + ": unable to create Date object for actual Temp C of O Expiration including grace period");
